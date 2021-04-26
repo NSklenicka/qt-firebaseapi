@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QString>
 #include <datasnapshot.h>
+#include <firebase.h>
 class ActionHandler:public QObject
 {
     Q_OBJECT
@@ -17,6 +18,7 @@ public slots:
     void onResponseReady(QString);
     void onDataChanged(DataSnapshot*);
 private:
+    Firebase *firebase;
 };
 
 #endif // ACTIONHANDLER_H

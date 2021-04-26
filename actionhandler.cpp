@@ -3,10 +3,14 @@
 #include <firebase.h>
 ActionHandler::ActionHandler()
 {
-    Firebase *firebase=new Firebase("https://firexample.firebaseio.com/");
+    firebase=new Firebase("https://testdb-57c5e-default-rtdb.firebaseio.com/");
+
     firebase->listenEvents();
     connect(firebase,SIGNAL(eventResponseReady(QString)),this,SLOT(onResponseReady(QString)));
     connect(firebase,SIGNAL(eventDataChanged(DataSnapshot*)),this,SLOT(onDataChanged(DataSnapshot*)));
+
+    firebase->getValue();
+
 }
 void ActionHandler::onResponseReady(QString data)
 {
@@ -15,5 +19,14 @@ void ActionHandler::onResponseReady(QString data)
 }
 void ActionHandler::onDataChanged(DataSnapshot *data)
 {
-    qDebug()<<data->getDataMap();
+    qDebug() << "data changed";
+//    QVariantMap dataMap = data->getDataMap();
+//    QStringList keys = dataMap.keys();
+//    qDebug() << "keys: " << keys.join(", ");
+//    qDebug() << "food: " << dataMap.value("Food");
+
+    firebase->getValue();
+
+    //try just getting the data again? like the function above this.
+
 }
